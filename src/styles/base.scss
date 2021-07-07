@@ -1,0 +1,22 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  #app {
+    font-size: 0;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.picture-uploader__vant {
+  display: block !important;
+
+  .van-uploader__wrapper {
+    display: block;
+  }
+}
