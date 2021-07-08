@@ -1,17 +1,8 @@
 <template>
   <div class="g-container">
-    <Button
-      class="btn--next"
-      label="Buy Coin"
-      @click="buyCoin"
-      :disable="searchDisabled"
-    />
-    <Button
-      class="btn--next"
-      label="Buy goods"
-      @click="buyGoods"
-      :disable="searchDisabled"
-    />
+    <div class="demo">演示</div>
+    <Button class="btn--next" label="购买商品" @click="buyGoods" />
+    <Button class="btn--next" label="Buy Coin" @click="buyCoin" />
   </div>
 </template>
 
@@ -41,6 +32,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.demo {
+  font-size: 48px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 40px;
+}
 .btn--next {
   margin: var(--space-bottom) 0;
 }

@@ -7,21 +7,21 @@
       placeholder="Coin"
       :options="BuyOptions"
     />
-    <input
-      type="number"
-      v-model="form.amount"
-      label="Currency Amount"
-      placeholder="Amount:0.00"
-      class="input"
-      onkeyup="var p2 = parseFloat(value).toFixed(2);value = p2>=0?(/\.0?$/.test(value)?value:p2.replace(/0$/,'').replace(/\.0$/,'')):''"
-      onblur="value = value.replace(/\.0*$/,'')"
-    />
     <Field
       type="select"
       v-model="form.currency"
       label="Choose Currency"
       placeholder="Currency"
       :options="amountOptions"
+    />
+    <input
+      type="number"
+      v-model="form.amount"
+      label="Currency Amount"
+      placeholder="Currency Amount"
+      class="input"
+      onkeyup="var p2 = parseFloat(value).toFixed(2);value = p2>=0?(/\.0?$/.test(value)?value:p2.replace(/0$/,'').replace(/\.0$/,'')):''"
+      onblur="value = value.replace(/\.0*$/,'')"
     />
     <!-- <Field
       type="select"
@@ -80,7 +80,7 @@ export default {
     return {
       form: {
         buy: "BTC",
-        amount: "",
+        amount: "10",
         currency: "USD",
         method: "",
       },

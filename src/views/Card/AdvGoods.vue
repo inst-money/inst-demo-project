@@ -13,12 +13,18 @@
     />
     <div class="rows">
       <span class="input">价格</span>
-      <input type="text" :value="currency_amount" class="input" />
+      <input type="text" v-model="ac_amount" class="input" />
     </div>
-    <form method="post" action="https://wallet.advcash.com/sci/">
+    <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
       <input type="hidden" name="ac_account_email" :value="ac_account_email" />
       <input type="hidden" name="ac_sci_name" :value="ac_sci_name" />
-      <input type="hidden" name="ac_amount" :value="ac_amount" class="input" />
+      <input
+        type="hidden"
+        name="ac_amount"
+        v-model="ac_amount"
+        class="input"
+        ref="formRef"
+      />
       <input
         type="hidden"
         name="ac_currency"
@@ -50,7 +56,7 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <input type="submit" class="btn--next" />
+      <Button class="btn--next" label="确认" @click="onsubmits" />
     </form>
   </div>
 </template>
@@ -99,14 +105,14 @@ export default {
   },
   created() {
     this.to_coin = "BTC";
-    this.currency_amount = 10;
+    this.ac_amount = 10;
     this.from_currency = "USD";
     this.referncePrice = "33604.5";
     this.input1 = "眼镜";
     this.input2 = "10";
     this.approx = "0.00029758";
     let params = {
-      currency_amount: this.currency_amount,
+      currency_amount: this.ac_amount,
       from_currency: this.from_currency,
       to_coin: this.to_coin,
       note: "",
@@ -125,7 +131,38 @@ export default {
       this.ac_success_url = response.ac_success_url;
     });
   },
-  methods: {},
+  methods: {
+    async onsubmits(e) {
+      console.log("eeeee", e);
+      // e.preventDefault();
+      let params = {
+        currency_amount: this.ac_amount,
+        from_currency: this.from_currency,
+        to_coin: this.to_coin,
+        note: "",
+      };
+      let res = await advOrder(params);
+      let response = res.result;
+      this.ac_account_email = response.ac_account_email;
+      this.ac_amount = response.ac_amount;
+      this.ac_comments = response.ac_comments;
+      this.ac_currency = response.ac_currency;
+      this.ac_fail_url = response.ac_fail_url;
+      this.ac_order_id = response.ac_order_id;
+      this.ac_sci_name = response.ac_sci_name;
+      this.ac_sign = response.ac_sign;
+      this.ac_status_url = response.ac_status_url;
+      this.ac_success_url = response.ac_success_url;
+      // console.log("eeethis.$formRef", this.$refs.formRef);
+      // this.$refs.formRef.value = response.ac_amount;
+      console.log("this.$refs.formRef.value", this.$refs.formRef);
+      this.$refs.formRef.submit();
+    },
+    toChecked() {
+      console.log("123");
+      return false;
+    },
+  },
 };
 </script>
 

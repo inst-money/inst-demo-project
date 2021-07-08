@@ -109,7 +109,7 @@ export default {
       from_currency: "",
       to_coin: "",
       approx: "",
-      checked: false,
+      checked: true,
       ac_account_email: "",
       ac_sci_name: "",
       ac_amount: "",
@@ -129,8 +129,8 @@ export default {
     this.currency_amount = currency_amount;
     this.from_currency = from_currency;
     this.referncePrice = referncePrice;
-    this.input1 = referncePrice + to_coin;
-    this.input2 = currency_amount + from_currency;
+    this.input1 = referncePrice + " " + to_coin;
+    this.input2 = currency_amount + " " + from_currency;
     this.approx = approx;
     let params = {
       currency_amount,
