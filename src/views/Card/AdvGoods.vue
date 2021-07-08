@@ -1,59 +1,36 @@
 <template>
   <div class="g-container advCash-container">
-    <p>
-      Inst will transfer the cryptoto your Amount in 1~5 min,after you paying on
-      Inst.
-    </p>
     <div class="rows">
-      <span class="input">Unit price</span>
-      <input type="text" :value="input1" class="input" />
+      <span class="input">商品名</span>
+      <input type="text" :value="input1" class="input" :disabled="true" />
     </div>
+    <Field
+      type="select"
+      v-model="from_currency"
+      label="货币"
+      placeholder="Currency"
+      :options="amountOptions"
+    />
     <div class="rows">
-      <span class="input">Amount</span>
-      <input type="text" :value="input2" class="input" />
+      <span class="input">价格</span>
+      <input type="text" :value="currency_amount" class="input" />
     </div>
     <form method="post" action="https://wallet.advcash.com/sci/">
       <input type="hidden" name="ac_account_email" :value="ac_account_email" />
       <input type="hidden" name="ac_sci_name" :value="ac_sci_name" />
-      <!-- <div class="rows">
-        <span class="input">Amount</span>
-        <input type="text" name="ac_amount" :value="ac_amount" class="input" />
-      </div> -->
       <input type="hidden" name="ac_amount" :value="ac_amount" class="input" />
-      <!-- <div class="rows">
-        <span class="input">ac_currency</span>
-        <input
-          type="text"
-          name="ac_currency"
-          :value="ac_currency"
-          class="input"
-        />
-      </div> -->
       <input
         type="hidden"
         name="ac_currency"
         :value="ac_currency"
         class="input"
       />
-      <!-- <div class="rows">
-        <span class="input">ac_order_id</span>
-        <input
-          type="text"
-          name="ac_order_id"
-          :value="ac_order_id"
-          class="input"
-        />
-      </div> -->
       <input
         type="hidden"
         name="ac_order_id"
         :value="ac_order_id"
         class="input"
       />
-      <!-- <div class="rows">
-        <span class="input">ac_sign</span>
-        <input type="text" name="ac_sign" :value="ac_sign" class="input" />
-      </div> -->
       <input type="hidden" name="ac_sign" :value="ac_sign" class="input" />
       <input
         type="hidden"
@@ -73,24 +50,7 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <div class="rows">
-        <span class="input">comments</span>
-        <input
-          type="text"
-          name="ac_comments"
-          v-model="ac_comments"
-          placeholder="ac_comments"
-          class="input"
-        />
-      </div>
-
-      <van-checkbox v-model="checked" shape="square" class="checkBox">
-        I Underand that Inst is a 3rd party service provider. XXX will not take
-        any responsibilityfor any loss or damage caused by the use of this
-        service.</van-checkbox
-      >
-
-      <input type="submit" class="btn--next" :disabled="!checked" />
+      <input type="submit" class="btn--next" />
     </form>
   </div>
 </template>
@@ -105,6 +65,7 @@ export default {
   components: { Button, Field },
   data() {
     return {
+      currency: "USD",
       currency_amount: "",
       from_currency: "",
       to_coin: "",
@@ -120,22 +81,34 @@ export default {
       ac_comments: "",
       ac_status_url: "https://store.sandbox.inst.money/",
       ac_success_url: "https://store.sandbox.inst.money/",
+      amountOptions: [
+        {
+          value: "USD",
+          label: "USD",
+        },
+        {
+          value: "EUR",
+          label: "EUR",
+        },
+        {
+          value: "RUB",
+          label: "RUB",
+        },
+      ],
     };
   },
   created() {
-    const { currency_amount, from_currency, to_coin, approx, referncePrice } =
-      this.$route.query;
-    this.to_coin = to_coin;
-    this.currency_amount = currency_amount;
-    this.from_currency = from_currency;
-    this.referncePrice = referncePrice;
-    this.input1 = referncePrice + to_coin;
-    this.input2 = currency_amount + from_currency;
-    this.approx = approx;
+    this.to_coin = "BTC";
+    this.currency_amount = 10;
+    this.from_currency = "USD";
+    this.referncePrice = "33604.5";
+    this.input1 = "眼镜";
+    this.input2 = "10";
+    this.approx = "0.00029758";
     let params = {
-      currency_amount,
-      from_currency,
-      to_coin,
+      currency_amount: this.currency_amount,
+      from_currency: this.from_currency,
+      to_coin: this.to_coin,
       note: "",
     };
     advOrder(params).then((res) => {

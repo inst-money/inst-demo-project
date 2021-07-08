@@ -3,14 +3,14 @@
     <Field
       type="select"
       v-model="form.buy"
-      label="Coin"
+      label="Buy Coin"
       placeholder="Coin"
       :options="BuyOptions"
     />
     <input
       type="number"
       v-model="form.amount"
-      label="Amount"
+      label="Currency Amount"
       placeholder="Amount:0.00"
       class="input"
       onkeyup="var p2 = parseFloat(value).toFixed(2);value = p2>=0?(/\.0?$/.test(value)?value:p2.replace(/0$/,'').replace(/\.0$/,'')):''"
@@ -19,7 +19,7 @@
     <Field
       type="select"
       v-model="form.currency"
-      label="Currency"
+      label="Choose Currency"
       placeholder="Currency"
       :options="amountOptions"
     />

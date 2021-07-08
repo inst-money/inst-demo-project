@@ -18,8 +18,14 @@ const routes = [
     name: 'Card',
     component: () =>
       import(/* webpackChunkName: "index" */ '../views/Card/Index'),
-    redirect: '/card/chooseRule',
+    redirect: '/card/chooseGoods',
     children: [
+      {
+        path: 'chooseGoods',
+        name: 'chooseGoods',
+        component: () =>
+          import(/* webpackChunkName: "info" */ '../views/Card/ChooseGoods'),
+      },
       {
         path: 'chooseRule',
         name: 'chooseRule',
@@ -31,6 +37,12 @@ const routes = [
         name: 'advCash',
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/AdvCash'),
+      },
+      {
+        path: 'advGoods',
+        name: 'advGoods',
+        component: () =>
+          import(/* webpackChunkName: "info" */ '../views/Card/AdvGoods'),
       },
     ],
   },
