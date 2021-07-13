@@ -124,9 +124,14 @@ export default {
   },
   methods: {
     search() {
+      let auth =
+        "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
+        Date.now() +
+        ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
       let params = {
         from_currency: this.form.currency,
         to_coin: this.form.buy,
+        authorization: auth,
       };
       searchRates(params).then((res) => {
         this.offerDisplay = true;

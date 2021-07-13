@@ -13,7 +13,7 @@ const getErrorMsg = (code) => {
 }
 
 const service = axios.create({
-  baseURL: 'https://api.sandbox.railone.io',
+  baseURL: 'https://api.sandbox.inst.money',
   timeout: 30000,
 })
 

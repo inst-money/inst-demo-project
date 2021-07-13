@@ -12,48 +12,22 @@
       <span class="input">Amount</span>
       <input type="text" :value="input2" class="input" />
     </div>
-    <form method="post" action="https://wallet.advcash.com/sci/">
-      <input type="hidden" name="ac_account_email" :value="ac_account_email" />
-      <input type="hidden" name="ac_sci_name" :value="ac_sci_name" />
-      <!-- <div class="rows">
-        <span class="input">Amount</span>
-        <input type="text" name="ac_amount" :value="ac_amount" class="input" />
-      </div> -->
-      <input type="hidden" name="ac_amount" :value="ac_amount" class="input" />
-      <!-- <div class="rows">
-        <span class="input">ac_currency</span>
-        <input
-          type="text"
-          name="ac_currency"
-          :value="ac_currency"
-          class="input"
-        />
-      </div> -->
+    <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
+      <input type="hidden" name="ac_account_email" value="josh_chow@163.com" />
+      <input type="hidden" name="ac_sci_name" value="inst.money" />
+      <input type="hidden" name="ac_amount" v-model="ac_amount" class="input" />
       <input
         type="hidden"
         name="ac_currency"
-        :value="ac_currency"
+        :value="from_currency"
         class="input"
       />
-      <!-- <div class="rows">
-        <span class="input">ac_order_id</span>
-        <input
-          type="text"
-          name="ac_order_id"
-          :value="ac_order_id"
-          class="input"
-        />
-      </div> -->
       <input
         type="hidden"
         name="ac_order_id"
         :value="ac_order_id"
         class="input"
       />
-      <!-- <div class="rows">
-        <span class="input">ac_sign</span>
-        <input type="text" name="ac_sign" :value="ac_sign" class="input" />
-      </div> -->
       <input type="hidden" name="ac_sign" :value="ac_sign" class="input" />
       <input
         type="hidden"
@@ -73,23 +47,6 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <div class="rows">
-        <span class="input">comments</span>
-        <input
-          type="text"
-          name="ac_comments"
-          v-model="ac_comments"
-          placeholder="ac_comments"
-          class="input"
-        />
-      </div>
-
-      <van-checkbox v-model="checked" shape="square" class="checkBox">
-        I Underand that Inst is a 3rd party service provider. XXX will not take
-        any responsibilityfor any loss or damage caused by the use of this
-        service.</van-checkbox
-      >
-
       <input type="submit" class="btn--next" :disabled="!checked" />
     </form>
   </div>
@@ -101,7 +58,7 @@ import Button from "@/components/Button.vue";
 import { advOrder } from "@/api/data";
 
 export default {
-  name: "ChooseRule",
+  name: "AdvCash",
   components: { Button, Field },
   data() {
     return {
@@ -113,43 +70,41 @@ export default {
       ac_account_email: "",
       ac_sci_name: "",
       ac_amount: "",
-      ac_fail_url: "https://store.sandbox.inst.money/",
+      ac_fail_url: "https://store.sandbox.inst.money/fail.html",
       ac_order_id: "",
       ac_currency: "",
       ac_sign: "",
       ac_comments: "",
-      ac_status_url: "https://store.sandbox.inst.money/",
-      ac_success_url: "https://store.sandbox.inst.money/",
+      ac_status_url: "https://store.sandbox.inst.money/status.html",
+      ac_success_url: "https://store.sandbox.inst.money/success.html",
     };
   },
   created() {
+    console.log("kais");
     const { currency_amount, from_currency, to_coin, approx, referncePrice } =
       this.$route.query;
     this.to_coin = to_coin;
     this.currency_amount = currency_amount;
+    this.ac_amount = currency_amount;
     this.from_currency = from_currency;
     this.referncePrice = referncePrice;
     this.input1 = referncePrice + " " + to_coin;
     this.input2 = currency_amount + " " + from_currency;
     this.approx = approx;
+    let auth =
+      "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
+      Date.now() +
+      ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
     let params = {
-      currency_amount,
-      from_currency,
-      to_coin,
-      note: "",
+      amount: currency_amount,
+      currency: from_currency,
+      cust_order_id: Date.now(),
+      authorization: auth,
     };
     advOrder(params).then((res) => {
       let response = res.result;
-      this.ac_account_email = response.ac_account_email;
-      this.ac_amount = response.ac_amount;
-      this.ac_comments = response.ac_comments;
-      this.ac_currency = response.ac_currency;
-      this.ac_fail_url = response.ac_fail_url;
-      this.ac_order_id = response.ac_order_id;
-      this.ac_sci_name = response.ac_sci_name;
-      this.ac_sign = response.ac_sign;
-      this.ac_status_url = response.ac_status_url;
-      this.ac_success_url = response.ac_success_url;
+      this.ac_order_id = response.order_id;
+      this.ac_sign = response.data.signature;
     });
   },
   methods: {},
