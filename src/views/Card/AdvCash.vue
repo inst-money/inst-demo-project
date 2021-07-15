@@ -13,7 +13,7 @@
       <input type="text" :value="input2" class="input" />
     </div>
     <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
-      <input type="hidden" type="text" name="ac_ps" value="MASTERCARD" />
+      <input type="hidden" name="ac_ps" value="MASTERCARD" />
       <input type="hidden" name="ac_account_email" value="josh_chow@163.com" />
       <input type="hidden" name="ac_sci_name" value="inst.money" />
       <input type="hidden" name="ac_amount" v-model="ac_amount" class="input" />
