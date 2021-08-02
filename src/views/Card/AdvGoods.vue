@@ -13,7 +13,20 @@
     />
     <div class="rows">
       <span class="input">价格</span>
-      <input type="text" v-model="ac_amount" class="input" />
+      <input
+        type="text"
+        v-model.trim="ac_amount"
+        class="input"
+        oninput="value=value.toString().match(/^\d+(?:\.\d{0,2})?/)"
+      />
+    </div>
+    <div class="rows">
+      <span class="input">名字</span>
+      <input type="text" :value="name" class="input" />
+    </div>
+    <div class="rows">
+      <span class="input">邮箱</span>
+      <input type="text" :value="email" class="input" />
     </div>
     <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
       <input type="hidden" name="ac_ps" value="MASTERCARD" />
@@ -32,7 +45,7 @@
         :value="ac_order_id"
         class="input"
       />
-      <input type="hidden" name="ac_sign" :value="ac_sign" class="input" />
+      <input type="hidden" name="ac_sign" v-model="ac_sign" class="input" />
       <input
         type="hidden"
         name="ac_success_url"
@@ -59,13 +72,15 @@
 <script>
 import Field from "@/components/Field.vue";
 import Button from "@/components/Button.vue";
-import { advOrder } from "@/api/data";
+import { advOrder, advPayment } from "@/api/data";
 
 export default {
   name: "ChooseRule",
   components: { Button, Field },
   data() {
     return {
+      name: "",
+      email: "",
       currency: "USD",
       currency_amount: "",
       from_currency: "",
@@ -105,21 +120,6 @@ export default {
     this.input1 = "眼镜";
     this.input2 = "10";
     this.approx = "0.00029758";
-    let auth =
-      "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
-      Date.now() +
-      ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
-    let params = {
-      amount: this.ac_amount,
-      currency: this.from_currency,
-      cust_order_id: Date.now(),
-      authorization: auth,
-    };
-    advOrder(params).then((res) => {
-      let response = res.result;
-      this.ac_order_id = response.order_id;
-      this.ac_sign = response.data.signature;
-    });
   },
   methods: {
     async onsubmits(e) {
@@ -127,20 +127,45 @@ export default {
         "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
         Date.now() +
         ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
+      // let params = {
+      //   amount: this.ac_amount,
+      //   currency: this.from_currency,
+      //   cust_order_id: Date.now(),
+      //   authorization: auth,
+      // };
+      // await advOrder(params).then((res) => {
+      //   let response = res.result;
+      //   this.ac_order_id = response.order_id;
+      //   this.ac_sign = response.data.signature;
+      // });
+      // this.$refs.formRef.submit();
+      //获取订单url
       let params = {
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
+        customer: {
+          email: this.eamil,
+          name: this.name,
+        },
+        return_urls: {
+          success_url: window.location.href,
+          status_url: window.location.href,
+          fail_url: window.location.href,
+        },
+      };
+      let heareds = {
         authorization: auth,
       };
-      let res = await advOrder(params);
-      let response = res.result;
-      this.ac_order_id = response.order_id;
-      this.ac_sign = response.data.signature;
-      this.$refs.formRef.submit();
+      advPayment(params, heareds).then((res) => {
+        if (res.code === 0) {
+          let response = res.result;
+          let url = response.redirect_url;
+          window.location.href = url;
+        }
+      });
     },
     toChecked() {
-      console.log("123");
       return false;
     },
   },

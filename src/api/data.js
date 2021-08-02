@@ -195,3 +195,12 @@ export function advOrder(data) {
     data,
   })
 }
+
+export function advPayment(data, headers) {
+  return request({
+    url: '/api/v1/payment',
+    method: 'post',
+    headers,
+    data,
+  })
+}
