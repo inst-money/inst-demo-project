@@ -48,7 +48,8 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <input type="submit" class="btn--next" :disabled="!checked" />
+      <!-- <input type="submit" class="btn--next" :disabled="!checked" /> -->
+      <Button class="btn--next" label="确认" @click="onsubmits" />
     </form>
   </div>
 </template>
@@ -56,7 +57,7 @@
 <script>
 import Field from "@/components/Field.vue";
 import Button from "@/components/Button.vue";
-import { advOrder } from "@/api/data";
+import { advOrder, advPayment } from "@/api/data";
 
 export default {
   name: "AdvCash",
@@ -81,7 +82,6 @@ export default {
     };
   },
   created() {
-    console.log("kais");
     const { currency_amount, from_currency, to_coin, approx, referncePrice } =
       this.$route.query;
     this.to_coin = to_coin;
@@ -108,7 +108,34 @@ export default {
       this.ac_sign = response.data.signature;
     });
   },
-  methods: {},
+  methods: {
+    async onsubmits(e) {
+      let auth =
+        "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
+        Date.now() +
+        ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
+      let params = {
+        amount: this.ac_amount,
+        currency: this.from_currency,
+        cust_order_id: Date.now(),
+        return_urls: {
+          success_url: window.location.href,
+          status_url: window.location.href,
+          fail_url: window.location.href,
+        },
+      };
+      let heareds = {
+        authorization: auth,
+      };
+      advPayment(params, heareds).then((res) => {
+        if (res.code === 0) {
+          let response = res.result;
+          let url = response.redirect_url;
+          window.location.href = url;
+        }
+      });
+    },
+  },
 };
 </script>
 

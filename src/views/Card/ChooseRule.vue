@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       form: {
-        buy: "BTC",
+        buy: "USDT",
         amount: "10",
         currency: "USD",
         method: "",
@@ -87,7 +87,7 @@ export default {
       approx: 0,
       referncePrice: 0,
       BuyOptions: [
-        { value: "LTC", label: "LTC" },
+        { value: "USDT", label: "USDT" },
         { value: "BTC", label: "BTC" },
       ],
       offerDisplay: false,
@@ -133,14 +133,20 @@ export default {
         to_coin: this.form.buy,
         authorization: auth,
       };
-      searchRates(params).then((res) => {
+      if (this.form.buy == "USDT") {
         this.offerDisplay = true;
-        console.log("res", res);
-        this.referncePrice = res.result;
-        this.approx = BigNumber(this.form.amount)
-          .dividedBy(BigNumber(res.result))
-          .toFixed(8);
-      });
+        this.referncePrice = 1;
+        this.approx = 1;
+      } else {
+        searchRates(params).then((res) => {
+          this.offerDisplay = true;
+          console.log("res", res);
+          this.referncePrice = res.result;
+          this.approx = BigNumber(this.form.amount)
+            .dividedBy(BigNumber(res.result))
+            .toFixed(8);
+        });
+      }
     },
     buy() {
       this.$router.push({

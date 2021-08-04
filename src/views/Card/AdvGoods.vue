@@ -22,11 +22,11 @@
     </div>
     <div class="rows">
       <span class="input">名字</span>
-      <input type="text" :value="name" class="input" />
+      <input type="text" v-model="name" class="input" />
     </div>
     <div class="rows">
       <span class="input">邮箱</span>
-      <input type="text" :value="email" class="input" />
+      <input type="text" v-model="email" class="input" />
     </div>
     <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
       <input type="hidden" name="ac_ps" value="MASTERCARD" />
@@ -145,7 +145,7 @@ export default {
         currency: this.from_currency,
         cust_order_id: Date.now(),
         customer: {
-          email: this.eamil,
+          email: this.email,
           name: this.name,
         },
         return_urls: {
