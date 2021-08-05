@@ -80,7 +80,7 @@ export default {
     return {
       form: {
         buy: "USDT",
-        amount: "10",
+        amount: "8",
         currency: "USD",
         method: "",
       },
