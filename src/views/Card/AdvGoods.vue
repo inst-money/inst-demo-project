@@ -89,7 +89,7 @@ export default {
       checked: false,
       ac_account_email: "",
       ac_sci_name: "",
-      ac_amount: 10,
+      ac_amount: 8,
       ac_fail_url: "https://store.sandbox.inst.money/fail.html",
       ac_order_id: "",
       ac_currency: "",
