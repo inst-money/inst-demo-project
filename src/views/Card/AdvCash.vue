@@ -118,11 +118,7 @@ export default {
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
-        return_urls: {
-          success_url: window.location.href,
-          status_url: window.location.href,
-          fail_url: window.location.href,
-        },
+        return_url: window.location.href,
       };
       let heareds = {
         authorization: auth,
