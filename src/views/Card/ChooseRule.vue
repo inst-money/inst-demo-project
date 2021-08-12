@@ -150,7 +150,7 @@ export default {
     },
     buy() {
       this.$router.push({
-        path: "/card/advCash",
+        path: "/card/pay",
         query: {
           currency_amount: this.form.amount,
           from_currency: this.form.currency,

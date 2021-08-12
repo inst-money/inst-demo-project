@@ -1073,6 +1073,11 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@moonpay/browser@^1.9.0":
+  version "1.9.0"
+  resolved "https://registry.nlark.com/@moonpay/browser/download/@moonpay/browser-1.9.0.tgz#745f0ba4b45f667271f729be336dcf0146c1e035"
+  integrity sha1-dF8LpLRfZnJx9ym+M23PAUbB4DU=
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

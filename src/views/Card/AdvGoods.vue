@@ -28,7 +28,7 @@
       <span class="input">邮箱</span>
       <input type="text" v-model="email" class="input" />
     </div>
-    <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
+    <form method="post" action="https://wallet.inst.money/sci/" ref="formRef">
       <input type="hidden" name="ac_ps" value="MASTERCARD" />
       <input type="hidden" name="ac_account_email" value="josh_chow@163.com" />
       <input type="hidden" name="ac_sci_name" value="inst.money" />

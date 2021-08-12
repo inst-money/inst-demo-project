@@ -33,7 +33,7 @@ const routes = [
           import(/* webpackChunkName: "info" */ '../views/Card/ChooseRule'),
       },
       {
-        path: 'advCash',
+        path: 'pay',
         name: 'advCash',
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/AdvCash'),
@@ -44,6 +44,12 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/AdvGoods'),
       },
+      // {
+      //   path: 'test_pay_SDK',
+      //   name: 'test_pay_SDK',
+      //   component: () =>
+      //     import(/* webpackChunkName: "info" */ '../views/Card/TestPaySDK'),
+      // },
     ],
   },
 ]

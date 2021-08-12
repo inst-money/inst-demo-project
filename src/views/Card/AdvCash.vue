@@ -12,7 +12,7 @@
       <span class="input">Amount</span>
       <input type="text" :value="input2" class="input" />
     </div>
-    <form method="post" action="https://wallet.advcash.com/sci/" ref="formRef">
+    <form method="post" action="https://wallet.inst.money/sci/" ref="formRef">
       <input type="hidden" name="ac_ps" value="MASTERCARD" />
       <input type="hidden" name="ac_account_email" value="josh_chow@163.com" />
       <input type="hidden" name="ac_sci_name" value="inst.money" />
@@ -92,21 +92,21 @@ export default {
     this.input1 = referncePrice + " " + to_coin;
     this.input2 = currency_amount + " " + from_currency;
     this.approx = approx;
-    let auth =
-      "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
-      Date.now() +
-      ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
-    let params = {
-      amount: currency_amount,
-      currency: from_currency,
-      cust_order_id: Date.now(),
-      authorization: auth,
-    };
-    advOrder(params).then((res) => {
-      let response = res.result;
-      this.ac_order_id = response.order_id;
-      this.ac_sign = response.data.signature;
-    });
+    // let auth =
+    //   "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
+    //   Date.now() +
+    //   ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
+    // let params = {
+    //   amount: currency_amount,
+    //   currency: from_currency,
+    //   cust_order_id: Date.now(),
+    //   authorization: auth,
+    // };
+    // advOrder(params).then((res) => {
+    //   let response = res.result;
+    //   this.ac_order_id = response.order_id;
+    //   this.ac_sign = response.data.signature;
+    // });
   },
   methods: {
     async onsubmits(e) {
