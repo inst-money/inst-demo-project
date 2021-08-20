@@ -176,12 +176,12 @@ export function submitSimpleKycData(data) {
 
 export function searchRates(params) {
   return request({
-    url: '/api/v1/rates',
+    url: '/api/v1/buycrypto',
     headers: {
       Authorization: params.authorization,
     },
-    method: 'get',
-    params,
+    method: 'post',
+    data: params,
   })
 }
 

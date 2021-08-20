@@ -38,31 +38,16 @@
     />
 
     <h2>BEST OFFER</h2>
-    <div class="table-container" v-if="offerDisplay">
-      <div class="table-row">
-        <div class="table-column">Name</div>
-        <div class="table-column">
-          <img
-            class="number__eye"
-            src="../../assets/images/instLogo.png"
-            alt="hide"
-          />
-        </div>
-      </div>
-      <div class="table-row">
-        <div class="table-column">Approx</div>
-        <div class="table-column">{{ approx }}</div>
-      </div>
-      <div class="table-row">
-        <div class="table-column">Refernce price</div>
-        <div class="table-column">{{ referncePrice }}</div>
-      </div>
-      <div class="table-row">
-        <div class="table-column">Transaction</div>
-        <div class="table-column table-column-buy" @click="buy">
-          <a class="aStyle">BUY</a>
-        </div>
-      </div>
+    <div class="table-container">
+      <iframe
+        :src="redirect_url"
+        height="715"
+        width="1280"
+        frameBorder="0"
+        v-if="redirect_url"
+      >
+        <p>您的浏览器暂不支持 iframe 标签。</p>
+      </iframe>
     </div>
   </div>
 </template>
@@ -70,7 +55,6 @@
 <script>
 import Field from "@/components/Field.vue";
 import Button from "@/components/Button.vue";
-import BigNumber from "bignumber.js";
 import { searchRates } from "@/api/data";
 
 export default {
@@ -80,16 +64,13 @@ export default {
     return {
       form: {
         buy: "USDT",
-        amount: "8",
+        amount: "31",
         currency: "USD",
         method: "",
       },
       approx: 0,
       referncePrice: 0,
-      BuyOptions: [
-        { value: "USDT", label: "USDT" },
-        { value: "BTC", label: "BTC" },
-      ],
+      BuyOptions: [{ value: "USDT", label: "USDT" }],
       offerDisplay: false,
       amountOptions: [
         {
@@ -99,10 +80,6 @@ export default {
         {
           value: "EUR",
           label: "EUR",
-        },
-        {
-          value: "RUB",
-          label: "RUB",
         },
       ],
       methodOptions: [
@@ -115,7 +92,6 @@ export default {
   },
   computed: {
     searchDisabled() {
-      console.log("this.form", this.form);
       if (!this.form.buy || !this.form.currency || !this.form.amount) {
         return true;
       }
@@ -123,6 +99,15 @@ export default {
     },
   },
   methods: {
+    randomString(e) {
+      e = e || 32;
+      var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
+        a = t.length,
+        n = "";
+      let i;
+      for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+      return n;
+    },
     search() {
       let auth =
         "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
@@ -132,21 +117,16 @@ export default {
         from_currency: this.form.currency,
         to_coin: this.form.buy,
         authorization: auth,
+        amount: this.form.amount,
+        buy_crypto: this.form.buy,
+        currency: this.form.currency,
+        return_url: "https://sandbox.inst.money/status.html",
+        cust_order_id: this.randomString(10),
       };
-      if (this.form.buy == "USDT") {
-        this.offerDisplay = true;
-        this.referncePrice = 1;
-        this.approx = 1;
-      } else {
-        searchRates(params).then((res) => {
-          this.offerDisplay = true;
-          console.log("res", res);
-          this.referncePrice = res.result;
-          this.approx = BigNumber(this.form.amount)
-            .dividedBy(BigNumber(res.result))
-            .toFixed(8);
-        });
-      }
+      searchRates(params).then((res) => {
+        console.log("res", res);
+        window.open(res.result.redirect_url, "_blank");
+      });
     },
     buy() {
       this.$router.push({
