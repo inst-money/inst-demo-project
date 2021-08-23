@@ -18,10 +18,10 @@ const routes = [
     name: 'Card',
     component: () =>
       import(/* webpackChunkName: "index" */ '../views/Card/Index'),
-    redirect: '/demo/paymentMethod',
+    redirect: '/demo/payment',
     children: [
       {
-        path: 'paymentMethod',
+        path: 'payment',
         name: 'chooseGoods',
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/ChooseGoods'),
