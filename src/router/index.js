@@ -11,17 +11,17 @@ VueRouter.prototype.push = function push(location) {
 const routes = [
   {
     path: '/',
-    redirect: '/card',
+    redirect: '/demo',
   },
   {
-    path: '/card',
+    path: '/demo',
     name: 'Card',
     component: () =>
       import(/* webpackChunkName: "index" */ '../views/Card/Index'),
-    redirect: '/card/chooseGoods',
+    redirect: '/demo/paymentMethod',
     children: [
       {
-        path: 'chooseGoods',
+        path: 'paymentMethod',
         name: 'chooseGoods',
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/ChooseGoods'),

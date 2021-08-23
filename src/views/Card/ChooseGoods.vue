@@ -29,17 +29,17 @@ export default {
   methods: {
     buyCoin() {
       this.$router.push({
-        path: "/card/chooseRule",
+        path: "/demo/chooseRule",
       });
     },
     buyGoods() {
       this.$router.push({
-        path: "/card/advGoods",
+        path: "/demo/advGoods",
       });
     },
     buyGoodsCurrency() {
       this.$router.push({
-        path: "/card/advCollection",
+        path: "/demo/advCollection",
       });
     },
   },
