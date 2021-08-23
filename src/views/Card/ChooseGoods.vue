@@ -2,7 +2,11 @@
   <div class="g-container">
     <div class="demo">演示</div>
     <Button class="btn--next" label="法币收款(聚合买币)" @click="buyCoin" />
-    <Button class="btn--next" label="加密货币收款" @click="buyGoods" />
+    <Button
+      class="btn--next"
+      label="加密货币收款(聚合支付)"
+      @click="buyGoods"
+    />
     <Button
       class="btn--next"
       label="法币/加密货币收款"

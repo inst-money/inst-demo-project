@@ -39,10 +39,11 @@
     <div class="table-container">
       <iframe
         :src="redirect_url"
-        height="715"
-        width="1280"
+        height="1000"
+        width="100%"
         frameBorder="0"
         v-if="redirect_url"
+        target="_blank"
       >
         <p>您的浏览器暂不支持 iframe 标签。</p>
       </iframe>
@@ -66,6 +67,7 @@ export default {
         currency: "USD",
         method: "",
       },
+      redirect_url: "",
       approx: 0,
       referncePrice: 0,
       BuyOptions: [{ value: "USDT", label: "USDT" }],
@@ -122,7 +124,8 @@ export default {
         cust_order_id: this.randomString(10),
       };
       searchRates(params).then((res) => {
-        window.open(res.result.redirect_url, "_self");
+        this.redirect_url = res.result.redirect_url;
+        // window.open(res.result.redirect_url, "_self");
       });
     },
     buy() {
