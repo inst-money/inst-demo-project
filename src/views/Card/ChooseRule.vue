@@ -124,8 +124,8 @@ export default {
         cust_order_id: this.randomString(10),
       };
       searchRates(params).then((res) => {
-        this.redirect_url = res.result.redirect_url;
-        // window.open(res.result.redirect_url, "_self");
+        // this.redirect_url = res.result.redirect_url;
+        window.open(res.result.redirect_url, "_self");
       });
     },
     buy() {
