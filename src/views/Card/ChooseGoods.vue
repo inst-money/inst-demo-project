@@ -1,8 +1,14 @@
 <template>
   <div class="g-container">
     <div class="demo">演示</div>
-    <Button class="btn--next" label="购买商品" @click="buyGoods" />
-    <Button class="btn--next" label="Buy Coin" @click="buyCoin" />
+    <Button class="btn--next" label="法币收款(聚合买币)" @click="buyCoin" />
+    <Button class="btn--next" label="加密货币收款" @click="buyGoods" />
+    <Button
+      class="btn--next"
+      label="法币/加密货币收款"
+      @click="buyGoodsCurrency"
+    />
+    <Button class="btn--next" label="买/卖加密货币" />
   </div>
 </template>
 
@@ -25,6 +31,11 @@ export default {
     buyGoods() {
       this.$router.push({
         path: "/card/advGoods",
+      });
+    },
+    buyGoodsCurrency() {
+      this.$router.push({
+        path: "/card/advCollection",
       });
     },
   },

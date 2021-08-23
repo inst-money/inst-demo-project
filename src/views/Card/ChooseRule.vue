@@ -3,7 +3,7 @@
     <Field
       type="select"
       v-model="form.buy"
-      label="Buy Coin"
+      label="Buy Crypto Currency"
       placeholder="Coin"
       :options="BuyOptions"
     />
@@ -36,8 +36,6 @@
       @click="search"
       :disable="searchDisabled"
     />
-
-    <h2>BEST OFFER</h2>
     <div class="table-container">
       <iframe
         :src="redirect_url"
