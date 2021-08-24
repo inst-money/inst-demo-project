@@ -50,6 +50,14 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "info" */ '../views/Card/AdvCollection'),
       },
+      {
+        path: 'transactionCryptoCurrency',
+        name: 'transactionCryptoCurrency',
+        component: () =>
+          import(
+            /* webpackChunkName: "info" */ '../views/Card/TransactionCryptoCurrency'
+          ),
+      },
       // {
       //   path: 'test_pay_SDK',
       //   name: 'test_pay_SDK',

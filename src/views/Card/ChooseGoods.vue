@@ -12,7 +12,11 @@
       label="法币/加密货币收款"
       @click="buyGoodsCurrency"
     />
-    <Button class="btn--next" label="买/卖加密货币" />
+    <Button
+      class="btn--next"
+      label="买/卖加密货币"
+      @click="transcationCryptoCurrency"
+    />
   </div>
 </template>
 
@@ -41,6 +45,15 @@ export default {
       this.$router.push({
         path: "/demo/advCollection",
       });
+    },
+    transcationCryptoCurrency() {
+      // this.$router.push({
+      //   path: "/demo/transactionCryptoCurrency",
+      // });
+      window.open(
+        "https://buy.sandbox.inst.money/crypto?id=b5d0b997c2444eb98e26bd93e3f5fe48",
+        "_blank"
+      );
     },
   },
 };
