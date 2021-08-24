@@ -251,5 +251,11 @@
   "code151001": "Invalid Parameter",
   "code151002": "Address verification error",
   "code151004": "Encryption error",
-  "code151005": "Decryption error"
+  "code151005": "Decryption error",
+
+  "demo": "Demo",
+  "choose1": "Buy Crypto Gateway",
+  "choose2": "Crypto Payment Gateway",
+  "choose3": "Currency / Crypto Currency Payment",
+  "choose4": "Buy / Sell Crypto Currency"
 }

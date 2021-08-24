@@ -1,20 +1,17 @@
 <template>
   <div class="g-container">
-    <div class="demo">演示</div>
-    <Button class="btn--next" label="法币收款(聚合买币)" @click="buyCoin" />
+    <SwitchLang />
+    <div class="demo">{{ $t("demo") }}</div>
+    <Button class="btn--next" :label="$t('choose1')" @click="buyCoin" />
+    <Button class="btn--next" :label="$t('choose2')" @click="buyGoods" />
     <Button
       class="btn--next"
-      label="加密货币收款(聚合支付)"
-      @click="buyGoods"
-    />
-    <Button
-      class="btn--next"
-      label="法币/加密货币收款"
+      :label="$t('choose3')"
       @click="buyGoodsCurrency"
     />
     <Button
       class="btn--next"
-      label="买/卖加密货币"
+      :label="$t('choose4')"
       @click="transcationCryptoCurrency"
     />
   </div>
@@ -22,12 +19,15 @@
 
 <script>
 import Button from "@/components/Button.vue";
+import SwitchLang from "@/components/SwitchLang.vue";
 
 export default {
   name: "ChooseRule",
-  components: { Button },
+  components: { Button, SwitchLang },
   data() {
-    return {};
+    return {
+      mobileLangValue: "",
+    };
   },
 
   methods: {
