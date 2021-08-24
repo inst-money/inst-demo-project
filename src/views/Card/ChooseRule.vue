@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       form: {
-        buy: "USDT",
+        buy: "USDT-ERC20",
         amount: "31",
         currency: "USD",
         method: "",
@@ -70,7 +70,7 @@ export default {
       redirect_url: "",
       approx: 0,
       referncePrice: 0,
-      BuyOptions: [{ value: "USDT", label: "USDT" }],
+      BuyOptions: [{ value: "USDT-ERC20", label: "USDT-ERC20" }],
       offerDisplay: false,
       amountOptions: [
         {
