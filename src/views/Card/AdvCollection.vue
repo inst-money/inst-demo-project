@@ -3,12 +3,12 @@
     <Field
       type="select"
       v-model="from_currency"
-      label="货币"
+      label="Currency"
       placeholder="Currency"
       :options="amountOptions"
     />
     <div class="rows">
-      <span class="input">金额</span>
+      <span class="input">Amount</span>
       <input
         type="text"
         v-model.trim="ac_amount"
@@ -52,7 +52,7 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <Button class="btn--next" label="确认" @click="onsubmits" />
+      <Button class="btn--next" label="Confirm" @click="onsubmits" />
     </form>
   </div>
 </template>

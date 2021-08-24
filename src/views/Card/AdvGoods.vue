@@ -1,18 +1,18 @@
 <template>
   <div class="g-container advCash-container">
     <div class="rows">
-      <span class="input">商品名</span>
+      <span class="input">Goods name</span>
       <input type="text" :value="input1" class="input" :disabled="true" />
     </div>
     <Field
       type="select"
       v-model="from_currency"
-      label="货币"
+      label="Currency"
       placeholder="Currency"
       :options="amountOptions"
     />
     <div class="rows">
-      <span class="input">价格</span>
+      <span class="input">Price</span>
       <input
         type="text"
         v-model.trim="ac_amount"
@@ -21,11 +21,11 @@
       />
     </div>
     <div class="rows">
-      <span class="input">名字</span>
+      <span class="input">Name</span>
       <input type="text" v-model="name" class="input" />
     </div>
     <div class="rows">
-      <span class="input">邮箱</span>
+      <span class="input">Email</span>
       <input type="text" v-model="email" class="input" />
     </div>
     <form method="post" action="https://wallet.inst.money/sci/" ref="formRef">
@@ -64,7 +64,7 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <Button class="btn--next" label="确认" @click="onsubmits" />
+      <Button class="btn--next" label="Confirm" @click="onsubmits" />
     </form>
   </div>
 </template>
@@ -117,7 +117,7 @@ export default {
     this.to_coin = "BTC";
     this.from_currency = "USD";
     this.referncePrice = "33604.5";
-    this.input1 = "眼镜";
+    this.input1 = "Goods";
     this.input2 = "10";
     this.approx = "0.00029758";
   },
