@@ -109,24 +109,27 @@ export default {
       return n;
     },
     search() {
-      let auth =
-        "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
-        Date.now() +
-        ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
-      let params = {
-        from_currency: this.form.currency,
-        to_coin: this.form.buy,
-        authorization: auth,
-        amount: this.form.amount,
-        buy_crypto: this.form.buy,
-        currency: this.form.currency,
-        return_url: "https://sandbox.inst.money/status.html",
-        cust_order_id: this.randomString(10),
-      };
-      searchRates(params).then((res) => {
-        // this.redirect_url = res.result.redirect_url;
-        window.open(res.result.redirect_url, "_self");
-      });
+      // let auth =
+      //   "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
+      //   Date.now() +
+      //   ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
+      // let params = {
+      //   from_currency: this.form.currency,
+      //   to_coin: this.form.buy,
+      //   authorization: auth,
+      //   amount: this.form.amount,
+      //   buy_crypto: this.form.buy,
+      //   currency: this.form.currency,
+      //   return_url: "https://sandbox.inst.money/status.html",
+      //   cust_order_id: this.randomString(10),
+      // };
+      // searchRates(params).then((res) => {
+      //   // this.redirect_url = res.result.redirect_url;
+      //   window.open(res.result.redirect_url, "_self");
+      // });
+      // window.open(res.result.redirect_url, "_self");
+      let url = `https://buy.sandbox.inst.money/?id=52ea54b39a0f40a3b335836258bf0470&buy_crypto=${this.form.buy}&currency=${this.form.currency}&amount=${this.form.amount}`;
+      window.open(url, "_self");
     },
     buy() {
       this.$router.push({
