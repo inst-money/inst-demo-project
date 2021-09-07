@@ -128,7 +128,7 @@ export default {
       //   window.open(res.result.redirect_url, "_self");
       // });
       // window.open(res.result.redirect_url, "_self");
-      let url = `https://buy.sandbox.inst.money/?id=52ea54b39a0f40a3b335836258bf0470&buy_crypto=${this.form.buy}&currency=${this.form.currency}&amount=${this.form.amount}`;
+      let url = `https://buy.sandbox.inst.money/?id=ddb2e451f9534b61a3476f6f4316087e&buy_crypto=${this.form.buy}&currency=${this.form.currency}&amount=${this.form.amount}`;
       window.open(url, "_self");
     },
     buy() {
