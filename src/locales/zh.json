@@ -258,5 +258,6 @@
   "choose1": "法币收款(聚合买币)",
   "choose2": "加密货币收款(聚合支付)",
   "choose3": "加密货币收款",
-  "choose4": "买/卖加密货币"
+  "choose4": "法币收款(最优买币)",
+  "choose5": "Buy/Sell、Exchange、Card演示"
 }

@@ -3,16 +3,16 @@
     <SwitchLang />
     <div class="demo">{{ $t("demo") }}</div>
     <Button class="btn--next" :label="$t('choose1')" @click="buyCoin" />
-    <Button class="btn--next" :label="$t('choose2')" @click="buyGoods" />
-    <Button
-      class="btn--next"
-      :label="$t('choose3')"
-      @click="buyGoodsCurrency"
-    />
     <Button
       class="btn--next"
       :label="$t('choose4')"
       @click="transcationCryptoCurrency"
+    />
+    <Button class="btn--next" :label="$t('choose2')" @click="buyGoods" />
+    <Button
+      class="btn--next"
+      :label="$t('choose5')"
+      @click="buyGoodsCurrency"
     />
   </div>
 </template>
@@ -42,9 +42,7 @@ export default {
       });
     },
     buyGoodsCurrency() {
-      this.$router.push({
-        path: "/demo/advCollection",
-      });
+      console.log("111");
     },
     transcationCryptoCurrency() {
       // this.$router.push({
