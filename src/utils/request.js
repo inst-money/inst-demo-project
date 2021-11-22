@@ -13,7 +13,7 @@ const getErrorMsg = (code) => {
 }
 
 const service = axios.create({
-  baseURL: 'https://api.sandbox.inst.money',
+  baseURL: 'http://175.41.179.89',
   timeout: 30000,
 })
 

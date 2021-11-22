@@ -204,3 +204,15 @@ export function advPayment(data, headers) {
     data,
   })
 }
+
+export function getPaymentId(params, authorization) {
+  return request({
+    url: '/api/v1/payment',
+    headers: {
+      Authorization: authorization,
+      'Access-Passphrase': '12345678a',
+    },
+    method: 'post',
+    data: params,
+  })
+}
