@@ -131,86 +131,88 @@
 </template>
 
 <script>
-import { Base64 } from "js-base64";
-import { submitSimpleKycData } from "@/api/data";
-import { formatDate } from "@/utils/format";
-import Field from "@/components/Field.vue";
-import Button from "@/components/Button.vue";
-import EmailSend from "./components/EmailSend.vue";
-import countryList from "@/assets/country.json";
-import PictureUploader from "@/components/PictureUploader.vue";
+import { Base64 } from 'js-base64';
+import { submitSimpleKycData } from '@/api/data';
+import { formatDate } from '@/utils/format';
+import Field from '@/components/Field.vue';
+import Button from '@/components/Button.vue';
+import countryList from '@/assets/country.json';
+import PictureUploader from '@/components/PictureUploader.vue';
+import EmailSend from './components/EmailSend.vue';
 
 export default {
-  name: "ApplicationData",
-  components: { EmailSend, Button, Field, PictureUploader },
+  name: 'ApplicationData',
+  components: {
+    EmailSend, Button, Field, PictureUploader,
+  },
   data() {
     return {
       form: {
-        first_name: "",
-        last_name: "",
-        birthday: "",
-        nationality: "",
-        doc_type: "",
-        doc_no: "",
-        card_type_id: "",
-        front_doc: "",
-        mix_doc: "",
-        gender: "",
-        country: "",
-        state: "",
-        city: "",
-        address: "",
-        country_code: "",
-        zipcode: "",
-        telArea: "+86",
-        mobile: "",
-        mail: "",
-        emailCode: "",
-        emailToken: "",
+        first_name: '',
+        last_name: '',
+        birthday: '',
+        nationality: '',
+        doc_type: '',
+        doc_no: '',
+        card_type_id: '',
+        front_doc: '',
+        mix_doc: '',
+        gender: '',
+        country: '',
+        state: '',
+        city: '',
+        address: '',
+        country_code: '',
+        zipcode: '',
+        telArea: '+86',
+        mobile: '',
+        mail: '',
+        emailCode: '',
+        emailToken: '',
       },
-      acct_id: "",
-      acct_name: "",
-      acct_no: "",
-      active_doc: "",
-      agent_id: "",
-      auditor: "",
-      back_doc: "",
-      bank_id: "",
-      cust_id: "",
-      card_no: "",
-      card_number: "",
-      maiden_name: "",
-      cust_tx_id: "",
-      create_time: "",
+      acct_id: '',
+      acct_name: '',
+      acct_no: '',
+      active_doc: '',
+      agent_id: '',
+      auditor: '',
+      back_doc: '',
+      bank_id: '',
+      cust_id: '',
+      card_no: '',
+      card_number: '',
+      maiden_name: '',
+      cust_tx_id: '',
+      create_time: '',
       pep: 0,
-      reason: "",
-      response: "",
+      reason: '',
+      response: '',
       status: 0,
-      update_time: "",
+      update_time: '',
       idTypeOptions: [
         {
-          label: this.$t("passport"),
-          value: "passport",
+          label: this.$t('passport'),
+          value: 'passport',
         },
       ],
       genderOptions: [
         {
-          label: this.$t("male"),
-          value: "male",
+          label: this.$t('male'),
+          value: 'male',
         },
         {
-          label: this.$t("female"),
-          value: "female",
+          label: this.$t('female'),
+          value: 'female',
         },
       ],
       countryOptions: countryList.map((item) => ({
         value: item.countryCode,
-        label: this.$i18n.locale === "zh" ? item.name_cn : item.name_en,
+        label: this.$i18n.locale === 'zh' ? item.name_cn : item.name_en,
       })),
       telAreaOptions: countryList.map((item) => ({
         value: `+${item.code}`,
         label: `+${item.code} ${
-          this.$i18n.locale === "zh" ? item.name_cn : item.name_en
+          this.$i18n.locale === 'zh' ? item.name_cn : item.name_en
         }`,
       })),
     };
@@ -219,7 +221,7 @@ export default {
     // this.$i18n.locale = "en";
     // localStorage.setItem("locale", en);
     const { data } = this.$route.query;
-    let reldata = JSON.parse(Base64.decode(data));
+    const reldata = JSON.parse(Base64.decode(data));
     const {
       first_name,
       last_name,
@@ -298,7 +300,7 @@ export default {
   methods: {
     submitKyc() {
       if (!this.form.emailToken) {
-        this.$toast(this.$t("click_send"));
+        this.$toast(this.$t('click_send'));
         return;
       }
       const params = {
@@ -325,7 +327,7 @@ export default {
         first_name: this.form.first_name,
         front_doc: this.form.front_doc,
         gender: this.form.gender,
-        kyc_info: "",
+        kyc_info: '',
         last_name: this.form.last_name,
         maiden_name: this.maiden_name,
         mail: this.form.mail,
@@ -336,7 +338,7 @@ export default {
         nationality: this.form.nationality,
         pep: this.pep,
         poa_doc: [],
-        poa_docs: "",
+        poa_docs: '',
         reason: this.reason,
         response: this.response,
         state: this.form.state,
@@ -348,7 +350,7 @@ export default {
         .then((res) => {
           if (res.code == 0) {
             this.$router.push({
-              path: "/card/application/result",
+              path: '/card/application/result',
             });
           }
         })

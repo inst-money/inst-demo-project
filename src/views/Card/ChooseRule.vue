@@ -52,40 +52,40 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import Button from "@/components/Button.vue";
-import { searchRates } from "@/api/data";
+import Field from '@/components/Field.vue';
+import Button from '@/components/Button.vue';
+import { searchRates } from '@/api/data';
 
 export default {
-  name: "ChooseRule",
+  name: 'ChooseRule',
   components: { Button, Field },
   data() {
     return {
       form: {
-        buy: "USDT-ERC20",
-        amount: "31",
-        currency: "USD",
-        method: "",
+        buy: 'USDT-ERC20',
+        amount: '31',
+        currency: 'USD',
+        method: '',
       },
-      redirect_url: "",
+      redirect_url: '',
       approx: 0,
       referncePrice: 0,
-      BuyOptions: [{ value: "USDT-ERC20", label: "USDT-ERC20" }],
+      BuyOptions: [{ value: 'USDT-ERC20', label: 'USDT-ERC20' }],
       offerDisplay: false,
       amountOptions: [
         {
-          value: "USD",
-          label: "USD",
+          value: 'USD',
+          label: 'USD',
         },
         {
-          value: "EUR",
-          label: "EUR",
+          value: 'EUR',
+          label: 'EUR',
         },
       ],
       methodOptions: [
         {
-          label: "visa",
-          value: "visa",
+          label: 'visa',
+          value: 'visa',
         },
       ],
     };
@@ -101,9 +101,9 @@ export default {
   methods: {
     randomString(e) {
       e = e || 32;
-      var t = "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678",
-        a = t.length,
-        n = "";
+      const t = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+      const a = t.length;
+      let n = '';
       let i;
       for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
       return n;
@@ -128,12 +128,12 @@ export default {
       //   window.open(res.result.redirect_url, "_self");
       // });
       // window.open(res.result.redirect_url, "_self");
-      let url = `https://buy.sandbox.inst.money/?id=ddb2e451f9534b61a3476f6f4316087e&buy_crypto=${this.form.buy}&currency=${this.form.currency}&amount=${this.form.amount}`;
-      window.open(url, "_self");
+      const url = `https://buy.sandbox.inst.money/?id=ddb2e451f9534b61a3476f6f4316087e&buy_crypto=${this.form.buy}&currency=${this.form.currency}&amount=${this.form.amount}`;
+      window.open(url, '_self');
     },
     buy() {
       this.$router.push({
-        path: "/card/pay",
+        path: '/card/pay',
         query: {
           currency_amount: this.form.amount,
           from_currency: this.form.currency,

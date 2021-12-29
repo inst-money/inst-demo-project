@@ -18,39 +18,44 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import SwitchLang from "@/components/SwitchLang.vue";
+import Button from '@/components/Button.vue';
+import SwitchLang from '@/components/SwitchLang.vue';
 
 export default {
-  name: "ChooseRule",
+  name: 'ChooseRule',
   components: { Button, SwitchLang },
   data() {
     return {
-      mobileLangValue: "",
+      mobileLangValue: '',
     };
   },
 
   methods: {
     buyCoin() {
       this.$router.push({
-        path: "/demo/chooseRule",
+        path: '/demo/chooseRule',
       });
     },
     buyGoods() {
       this.$router.push({
-        path: "/demo/advGoods",
+        path: '/demo/advGoods',
       });
     },
     buyGoodsCurrency() {
-      console.log("111");
+      console.log('111', window.grecaptcha);
+      window.grecaptcha.enterprise.ready(async () => {
+        console.log(222);
+        const token = await window.grecaptcha.enterprise.execute('6LcIqtYdAAAAAL846puTq7Zz_bad2j4wa_8awl3i', { action: 'LOGIN' });
+        console.log('token', token);
+      });
     },
     transcationCryptoCurrency() {
       // this.$router.push({
       //   path: "/demo/transactionCryptoCurrency",
       // });
       window.open(
-        "https://buy.sandbox.inst.money/crypto?id=b5d0b997c2444eb98e26bd93e3f5fe48",
-        "_blank"
+        'https://buy.sandbox.inst.money/crypto?id=b5d0b997c2444eb98e26bd93e3f5fe48',
+        '_blank',
       );
     },
   },

@@ -59,35 +59,35 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import PictureUploader from "@/components/PictureUploader.vue";
-import Button from "@/components/Button.vue";
-import { submitKycAuth } from "@/api/data";
-import countryList from "@/assets/country.json";
+import Field from '@/components/Field.vue';
+import PictureUploader from '@/components/PictureUploader.vue';
+import Button from '@/components/Button.vue';
+import { submitKycAuth } from '@/api/data';
+import countryList from '@/assets/country.json';
 
 export default {
-  name: "ApplicationAuth",
+  name: 'ApplicationAuth',
   components: { Button, PictureUploader, Field },
   data() {
     return {
       form: {
-        firstName: "",
-        lastName: "",
-        birthday: "",
-        country: "",
-        idType: "",
-        id: "",
-        idFront: "",
-        idHand: "",
+        firstName: '',
+        lastName: '',
+        birthday: '',
+        country: '',
+        idType: '',
+        id: '',
+        idFront: '',
+        idHand: '',
       },
       countryOptions: countryList.map((item) => ({
         value: item.countryCode,
-        label: this.$i18n.locale === "zh" ? item.name_cn : item.name_en,
+        label: this.$i18n.locale === 'zh' ? item.name_cn : item.name_en,
       })),
       idTypeOptions: [
         {
-          label: this.$t("passport"),
-          value: "passport",
+          label: this.$t('passport'),
+          value: 'passport',
         },
       ],
       paid: false,
@@ -110,7 +110,7 @@ export default {
         .then(() => {
           if (this.paid) {
             this.$router.push({
-              path: "/apply/finish",
+              path: '/apply/finish',
               query: {
                 id: this.$route.query.id,
                 no: this.$route.query.no,
@@ -118,7 +118,7 @@ export default {
             });
           } else {
             this.$router.push({
-              path: "/apply/pay",
+              path: '/apply/pay',
               query: {
                 id: this.$route.query.id,
                 no: this.$route.query.no,

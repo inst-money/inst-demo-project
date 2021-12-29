@@ -55,42 +55,43 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import Button from "@/components/Button.vue";
-import { advOrder, advPayment } from "@/api/data";
+import Field from '@/components/Field.vue';
+import Button from '@/components/Button.vue';
+import { advOrder, advPayment } from '@/api/data';
 
 export default {
-  name: "AdvCash",
+  name: 'AdvCash',
   components: { Button, Field },
   data() {
     return {
-      currency_amount: "",
-      from_currency: "",
-      to_coin: "",
-      approx: "",
+      currency_amount: '',
+      from_currency: '',
+      to_coin: '',
+      approx: '',
       checked: true,
-      ac_account_email: "",
-      ac_sci_name: "",
-      ac_amount: "",
-      ac_fail_url: "https://store.sandbox.inst.money/fail.html",
-      ac_order_id: "",
-      ac_currency: "",
-      ac_sign: "",
-      ac_comments: "",
-      ac_status_url: "https://store.sandbox.inst.money/status.html",
-      ac_success_url: "https://store.sandbox.inst.money/success.html",
+      ac_account_email: '',
+      ac_sci_name: '',
+      ac_amount: '',
+      ac_fail_url: 'https://store.sandbox.inst.money/fail.html',
+      ac_order_id: '',
+      ac_currency: '',
+      ac_sign: '',
+      ac_comments: '',
+      ac_status_url: 'https://store.sandbox.inst.money/status.html',
+      ac_success_url: 'https://store.sandbox.inst.money/success.html',
     };
   },
   created() {
-    const { currency_amount, from_currency, to_coin, approx, referncePrice } =
-      this.$route.query;
+    const {
+      currency_amount, from_currency, to_coin, approx, referncePrice,
+    } = this.$route.query;
     this.to_coin = to_coin;
     this.currency_amount = currency_amount;
     this.ac_amount = currency_amount;
     this.from_currency = from_currency;
     this.referncePrice = referncePrice;
-    this.input1 = referncePrice + " " + to_coin;
-    this.input2 = currency_amount + " " + from_currency;
+    this.input1 = `${referncePrice} ${to_coin}`;
+    this.input2 = `${currency_amount} ${from_currency}`;
     this.approx = approx;
     // let auth =
     //   "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
@@ -110,23 +111,22 @@ export default {
   },
   methods: {
     async onsubmits(e) {
-      let auth =
-        "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
-        Date.now() +
-        ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
-      let params = {
+      const auth = `Inst:b5d0b997c2444eb98e26bd93e3f5fe48:${
+        Date.now()
+      }:yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=`;
+      const params = {
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
         return_url: window.location.href,
       };
-      let heareds = {
+      const heareds = {
         authorization: auth,
       };
       advPayment(params, heareds).then((res) => {
         if (res.code === 0) {
-          let response = res.result;
-          let url = response.redirect_url;
+          const response = res.result;
+          const url = response.redirect_url;
           window.location.href = url;
         }
       });

@@ -23,22 +23,22 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import { getKycStatus } from "@/api/data";
+import Button from '@/components/Button.vue';
+import { getKycStatus } from '@/api/data';
 
 export default {
-  name: "ApplicationResult",
+  name: 'ApplicationResult',
   components: { Button },
   data() {
     return {
       isFail: false,
-      reason: "",
+      reason: '',
     };
   },
   methods: {
     go2Apply() {
       this.$router.push({
-        path: "/apply/data",
+        path: '/apply/data',
         query: {
           id: this.$route.query.id,
         },

@@ -26,17 +26,17 @@
 </template>
 
 <script>
-import MoonPay from "@moonpay/browser";
+import MoonPay from '@moonpay/browser';
 
 export default {
-  name: "testPaySDK",
+  name: 'testPaySDK',
   data() {
     return {
       form: null,
     };
   },
   created() {
-    MoonPay.initialize("pk_test_kRUbJHo4W4CPYg1SLfYJst6LAVL3qic");
+    MoonPay.initialize('pk_test_kRUbJHo4W4CPYg1SLfYJst6LAVL3qic');
     MoonPay.trackPageView();
     this.$ref.form = MoonPay.createCardDetailsForm((state) => {
       //  Example of the `state` object:
@@ -54,17 +54,17 @@ export default {
       //    ...
       //  }
     });
-    form.createField("#cc-number", {
-      type: "card-number",
-      name: "number",
+    form.createField('#cc-number', {
+      type: 'card-number',
+      name: 'number',
       css: {
         fontFamily:
-          "system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
-        fontSize: "16px",
-        lineHeight: "18px",
+          'system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+        fontSize: '16px',
+        lineHeight: '18px',
       },
-      placeholder: "4111 1111 1111 1111",
-      validations: ["required", "validCardNumber"],
+      placeholder: '4111 1111 1111 1111',
+      validations: ['required', 'validCardNumber'],
     });
 
     // form.createField("#cc-expiration", {
@@ -95,20 +95,20 @@ export default {
   },
   methods: {
     handleSubmit(event) {
-      console.log("123", event);
+      console.log('123', event);
       event.preventDefault();
       form.submit(
         {
-          street: "123 Mission St",
+          street: '123 Mission St',
           subStreet: null,
-          town: "San Francisco",
-          postCode: "94105",
-          state: "CA",
-          country: "USA",
+          town: 'San Francisco',
+          postCode: '94105',
+          state: 'CA',
+          country: 'USA',
         },
         (status, response) => {
-          console.log("response", response);
-        }
+          console.log('response', response);
+        },
       );
     },
   },

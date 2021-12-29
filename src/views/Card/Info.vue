@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import Card from "./components/Card.vue";
-import CardInfo from "./components/CardInfo.vue";
+import Card from './components/Card.vue';
+import CardInfo from './components/CardInfo.vue';
 
 export default {
-  name: "CardIntroPage",
+  name: 'CardIntroPage',
   components: { CardInfo, Card },
 };
 </script>

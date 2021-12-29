@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import Button from "@/components/Button.vue";
-import { sendSimpleEmail } from "@/api/user";
+import Field from '@/components/Field.vue';
+import Button from '@/components/Button.vue';
+import { sendSimpleEmail } from '@/api/user';
 
 export default {
-  name: "EmailSend",
+  name: 'EmailSend',
   components: { Button, Field },
   props: {
     email: {
@@ -50,15 +50,15 @@ export default {
   },
   data() {
     return {
-      status: "before", // sending, success
+      status: 'before', // sending, success
       count: 60,
       timer: null,
     };
   },
   methods: {
     send() {
-      this.status = "sending";
-      let params = {
+      this.status = 'sending';
+      const params = {
         email: this.email,
         acct_no: this.acct_no,
         card_type_id: this.card_type_id,
@@ -66,12 +66,12 @@ export default {
       };
       sendSimpleEmail(params)
         .then(({ result }) => {
-          this.status = "success";
-          this.$emit("update:token", result);
+          this.status = 'success';
+          this.$emit('update:token', result);
           this.startCount();
         })
         .catch(() => {
-          this.status = "before";
+          this.status = 'before';
         });
     },
     startCount() {
@@ -79,7 +79,7 @@ export default {
         if (this.count <= 0) {
           clearInterval(this.timer);
           this.count = 60;
-          this.status = "before";
+          this.status = 'before';
           return;
         }
         this.count -= 1;

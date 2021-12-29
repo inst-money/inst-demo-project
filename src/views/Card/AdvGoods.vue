@@ -70,63 +70,62 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import Button from "@/components/Button.vue";
-import { advOrder, advPayment } from "@/api/data";
+import Field from '@/components/Field.vue';
+import Button from '@/components/Button.vue';
+import { advOrder, advPayment } from '@/api/data';
 
 export default {
-  name: "ChooseRule",
+  name: 'ChooseRule',
   components: { Button, Field },
   data() {
     return {
-      name: "",
-      email: "",
-      currency: "USD",
-      currency_amount: "",
-      from_currency: "",
-      to_coin: "",
-      approx: "",
+      name: '',
+      email: '',
+      currency: 'USD',
+      currency_amount: '',
+      from_currency: '',
+      to_coin: '',
+      approx: '',
       checked: false,
-      ac_account_email: "",
-      ac_sci_name: "",
+      ac_account_email: '',
+      ac_sci_name: '',
       ac_amount: 8,
-      ac_fail_url: "https://store.sandbox.inst.money/fail.html",
-      ac_order_id: "",
-      ac_currency: "",
-      ac_sign: "",
-      ac_comments: "",
-      ac_status_url: "https://store.sandbox.inst.money/status.html",
-      ac_success_url: "https://store.sandbox.inst.money/success.html",
+      ac_fail_url: 'https://store.sandbox.inst.money/fail.html',
+      ac_order_id: '',
+      ac_currency: '',
+      ac_sign: '',
+      ac_comments: '',
+      ac_status_url: 'https://store.sandbox.inst.money/status.html',
+      ac_success_url: 'https://store.sandbox.inst.money/success.html',
       amountOptions: [
         {
-          value: "USD",
-          label: "USD",
+          value: 'USD',
+          label: 'USD',
         },
         {
-          value: "EUR",
-          label: "EUR",
+          value: 'EUR',
+          label: 'EUR',
         },
         {
-          value: "RUB",
-          label: "RUB",
+          value: 'RUB',
+          label: 'RUB',
         },
       ],
     };
   },
   created() {
-    this.to_coin = "BTC";
-    this.from_currency = "USD";
-    this.referncePrice = "33604.5";
-    this.input1 = "Goods";
-    this.input2 = "10";
-    this.approx = "0.00029758";
+    this.to_coin = 'BTC';
+    this.from_currency = 'USD';
+    this.referncePrice = '33604.5';
+    this.input1 = 'Goods';
+    this.input2 = '10';
+    this.approx = '0.00029758';
   },
   methods: {
     async onsubmits(e) {
-      let auth =
-        "Inst:b5d0b997c2444eb98e26bd93e3f5fe48:" +
-        Date.now() +
-        ":yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=";
+      const auth = `Inst:b5d0b997c2444eb98e26bd93e3f5fe48:${
+        Date.now()
+      }:yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=`;
       // let params = {
       //   amount: this.ac_amount,
       //   currency: this.from_currency,
@@ -139,8 +138,8 @@ export default {
       //   this.ac_sign = response.data.signature;
       // });
       // this.$refs.formRef.submit();
-      //获取订单url
-      let params = {
+      // 获取订单url
+      const params = {
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
@@ -150,13 +149,13 @@ export default {
         },
         return_url: window.location.href,
       };
-      let heareds = {
+      const heareds = {
         authorization: auth,
       };
       advPayment(params, heareds).then((res) => {
         if (res.code === 0) {
-          let response = res.result;
-          let url = response.redirect_url;
+          const response = res.result;
+          const url = response.redirect_url;
           window.location.href = url;
         }
       });

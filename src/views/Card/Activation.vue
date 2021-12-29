@@ -33,20 +33,22 @@
 </template>
 
 <script>
-import Field from "@/components/Field.vue";
-import EmailSend from "@/components/EmailSend.vue";
-import PictureUploader from "@/components/PictureUploader.vue";
-import Button from "@/components/Button.vue";
+import Field from '@/components/Field.vue';
+import EmailSend from '@/components/EmailSend.vue';
+import PictureUploader from '@/components/PictureUploader.vue';
+import Button from '@/components/Button.vue';
 
 export default {
-  name: "ApplicationAuth",
-  components: { EmailSend, Button, PictureUploader, Field },
+  name: 'ApplicationAuth',
+  components: {
+    EmailSend, Button, PictureUploader, Field,
+  },
   data() {
     return {
       form: {
-        email: "",
-        idFront: "",
-        emailCode: "",
+        email: '',
+        idFront: '',
+        emailCode: '',
       },
     };
   },

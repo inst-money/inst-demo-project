@@ -90,28 +90,29 @@
 </template>
 
 <script>
-import { Base64 } from "js-base64";
+import { Base64 } from 'js-base64';
+
 export default {
-  name: "CardInfo",
+  name: 'CardInfo',
   data() {
     return {
-      description: "",
-      account_bal_limit: "1000000",
-      bank_id: "",
-      card_network: "",
-      card_title: "",
-      card_type: "",
-      card_type_id: "",
-      currency_type: "",
-      daily_recharge_limit: "",
-      management_fee: "",
-      reg_fee: "",
+      description: '',
+      account_bal_limit: '1000000',
+      bank_id: '',
+      card_network: '',
+      card_title: '',
+      card_type: '',
+      card_type_id: '',
+      currency_type: '',
+      daily_recharge_limit: '',
+      management_fee: '',
+      reg_fee: '',
       virtual_card: 1,
     };
   },
   created() {
     const { data } = this.$route.query;
-    let reldata = JSON.parse(Base64.decode(data));
+    const reldata = JSON.parse(Base64.decode(data));
     const {
       description,
       account_bal_limit,
@@ -127,9 +128,7 @@ export default {
       virtual_card,
     } = reldata.result;
     this.description = description;
-    this.account_bal_limit = account_bal_limit
-      ? account_bal_limit
-      : "100000.00";
+    this.account_bal_limit = account_bal_limit || '100000.00';
     this.bank_id = bank_id;
     this.card_network = card_network;
     this.card_title = card_title;

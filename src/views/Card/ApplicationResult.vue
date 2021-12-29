@@ -26,12 +26,12 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
-import { Base64 } from "js-base64";
-import { getKycStatus } from "@/api/data";
+import Button from '@/components/Button.vue';
+import { Base64 } from 'js-base64';
+import { getKycStatus } from '@/api/data';
 
 export default {
-  name: "ApplicationResult",
+  name: 'ApplicationResult',
   components: { Button },
   data() {
     return {
@@ -41,39 +41,38 @@ export default {
       isActivating: false,
       isActivatFail: false,
       isActivatSuccess: false,
-      reason: "",
-      step: "kyc",
+      reason: '',
+      step: 'kyc',
     };
   },
   created() {
     // this.$i18n.locale = "en";
     // localStorage.setItem("locale", en);
     const { data } = this.$route.query;
-    let reldata = JSON.parse(Base64.decode(data));
+    const reldata = JSON.parse(Base64.decode(data));
     const { step, reason } = reldata.result;
     this.step = step;
     this.reason = reason;
     switch (step) {
-      case "kyc":
+      case 'kyc':
         this.isKYC = true;
         breack;
-      case "kyc-fail":
+      case 'kyc-fail':
         this.isKYCFail = true;
         break;
-      case "kyc-success":
+      case 'kyc-success':
         this.isKYCSuccess = true;
         break;
-      case "activating":
+      case 'activating':
         this.isActivating = true;
         break;
-      case "activate-fail":
+      case 'activate-fail':
         this.isActivatFail = true;
         break;
-      case "activate-success":
+      case 'activate-success':
         this.isActivatSuccess = true;
         break;
       default:
-        return;
     }
     // if (step === "kyc") {
     //   this.isKYC = true;

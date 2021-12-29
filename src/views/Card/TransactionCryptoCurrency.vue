@@ -6,10 +6,10 @@
 
 <script>
 export default {
-  name: "TransactionCryptoCurrency",
+  name: 'TransactionCryptoCurrency',
   data() {
     return {
-      url: "https://buy.sandbox.inst.money/crypto?id=b5d0b997c2444eb98e26bd93e3f5fe48",
+      url: 'https://buy.sandbox.inst.money/crypto?id=b5d0b997c2444eb98e26bd93e3f5fe48',
     };
   },
   methods: {},

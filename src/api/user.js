@@ -38,10 +38,10 @@ export function getKycProcess(id) {
   });
 }
 
-//简易
+// 简易
 export function sendSimpleEmail(params) {
   return request({
-    url:`/api/v1/simple/emails/${params.email}/verification-codes?acct_no=${params.acct_no}&card_type_id=${params.card_type_id}&cust_id=${params.cust_id}`,
+    url: `/api/v1/simple/emails/${params.email}/verification-codes?acct_no=${params.acct_no}&card_type_id=${params.card_type_id}&cust_id=${params.cust_id}`,
     method: 'post',
     data: {},
   });

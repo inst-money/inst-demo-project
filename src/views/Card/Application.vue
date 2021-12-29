@@ -6,19 +6,19 @@
 </template>
 
 <script>
-import Step from "@/components/Step.vue";
+import Step from '@/components/Step.vue';
 
 export default {
-  name: "Application",
+  name: 'Application',
   components: { Step },
   data() {
     return {
-      steps: ["Step", "Result"],
+      steps: ['Step', 'Result'],
     };
   },
   computed: {
     getStep() {
-      const step = ["/card/application/data", "/card/application/result"];
+      const step = ['/card/application/data', '/card/application/result'];
       return step.indexOf(this.$route.path);
     },
   },

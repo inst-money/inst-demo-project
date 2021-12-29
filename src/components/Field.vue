@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name: "Field",
+  name: 'Field',
   props: {
     value: {
       type: String,
@@ -73,12 +73,12 @@ export default {
     type: {
       type: String, // input select
       require: false,
-      default: "input",
+      default: 'input',
     },
     placeholder: {
       type: String,
       require: false,
-      default: "",
+      default: '',
     },
     options: {
       type: Array,
@@ -93,14 +93,14 @@ export default {
   },
   methods: {
     handleInput(e) {
-      this.$emit("input", e.target.value);
+      this.$emit('input', e.target.value);
     },
     handleBlur(e) {
-      this.$emit("blur", e.target.value);
+      this.$emit('blur', e.target.value);
     },
     getLabel(val) {
       const exist = this.options.find((item) => item.value === val);
-      return exist ? exist.label : "";
+      return exist ? exist.label : '';
     },
   },
 };
