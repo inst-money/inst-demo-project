@@ -110,6 +110,10 @@ export default {
           value: 'RUB',
           label: 'RUB',
         },
+        {
+          value: 'RP',
+          label: 'RP',
+        },
       ],
     };
   },
