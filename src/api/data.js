@@ -1,10 +1,11 @@
-import request from '@/utils/request';
+import request from '@/utils/request'
+import justPayRequest from '@/utils/justPayRequest'
 
 export function getCardList() {
   return request({
     url: '/user/card/card-list',
     method: 'get',
-  });
+  })
 }
 
 export function submitKycData(data) {
@@ -12,7 +13,7 @@ export function submitKycData(data) {
     url: '/user/kyc-1',
     method: 'post',
     data,
-  });
+  })
 }
 
 export function submitKycAuth(data) {
@@ -20,7 +21,7 @@ export function submitKycAuth(data) {
     url: '/user/kyc-2',
     method: 'post',
     data,
-  });
+  })
 }
 
 export function getChargeRecord(params) {
@@ -28,7 +29,7 @@ export function getChargeRecord(params) {
     url: '/user/deposit-transactions',
     method: 'get',
     params,
-  });
+  })
 }
 
 export function getCardBalance(no) {
@@ -38,7 +39,7 @@ export function getCardBalance(no) {
     data: {
       card_no: no,
     },
-  });
+  })
 }
 
 export function getCardChargeAddress(id) {
@@ -48,7 +49,7 @@ export function getCardChargeAddress(id) {
     params: {
       card_type_id: id,
     },
-  });
+  })
 }
 
 export function getBillRecord(data) {
@@ -56,7 +57,7 @@ export function getBillRecord(data) {
     url: '/user/bank/transaction-record',
     method: 'post',
     data,
-  });
+  })
 }
 
 export function getBillDetail(data) {
@@ -64,7 +65,7 @@ export function getBillDetail(data) {
     url: '/user/bank/transaction-record',
     method: 'get',
     params: data,
-  });
+  })
 }
 
 export function getKycStatus(cardTypeId) {
@@ -74,7 +75,7 @@ export function getKycStatus(cardTypeId) {
     params: {
       card_type_id: cardTypeId,
     },
-  });
+  })
 }
 
 export function getCardTypeInfo(cardTypeId) {
@@ -84,7 +85,7 @@ export function getCardTypeInfo(cardTypeId) {
     params: {
       card_type_id: cardTypeId,
     },
-  });
+  })
 }
 
 export function getCardRealNumber(cardNo) {
@@ -94,7 +95,7 @@ export function getCardRealNumber(cardNo) {
     params: {
       card_no: cardNo,
     },
-  });
+  })
 }
 
 export function getCouponList(params) {
@@ -102,7 +103,7 @@ export function getCouponList(params) {
     url: '/user/coupon',
     method: 'get',
     params,
-  });
+  })
 }
 
 export function postCoupon(params) {
@@ -110,7 +111,7 @@ export function postCoupon(params) {
     url: '/user/coupon',
     method: 'post',
     params,
-  });
+  })
 }
 
 export function giveCoupon(params) {
@@ -118,7 +119,7 @@ export function giveCoupon(params) {
     url: '/user/coupon/gift',
     method: 'POST',
     params,
-  });
+  })
 }
 
 export function postCouponExchange(code) {
@@ -128,7 +129,7 @@ export function postCouponExchange(code) {
     params: {
       coupon_code: code,
     },
-  });
+  })
 }
 
 export function getCouponInviCode() {
@@ -136,7 +137,7 @@ export function getCouponInviCode() {
     url: '/user/coupon/invitation-code',
     method: 'get',
     params: {},
-  });
+  })
 }
 
 export function postCouponInviCode(code) {
@@ -146,7 +147,7 @@ export function postCouponInviCode(code) {
     params: {
       invitation_code: code,
     },
-  });
+  })
 }
 
 export function getUserInfo() {
@@ -154,7 +155,7 @@ export function getUserInfo() {
     url: '/user/user-info',
     method: 'get',
     params: {},
-  });
+  })
 }
 
 export function postFeedback(data) {
@@ -162,7 +163,7 @@ export function postFeedback(data) {
     url: '/user/feedback',
     method: 'post',
     data,
-  });
+  })
 }
 
 // simple
@@ -171,7 +172,7 @@ export function submitSimpleKycData(data) {
     url: '/api/v1/simple/account-info',
     method: 'post',
     data,
-  });
+  })
 }
 
 export function searchRates(params) {
@@ -182,7 +183,7 @@ export function searchRates(params) {
     },
     method: 'post',
     data: params,
-  });
+  })
 }
 
 export function advOrder(data) {
@@ -193,7 +194,7 @@ export function advOrder(data) {
     },
     method: 'post',
     data,
-  });
+  })
 }
 
 export function advPayment(data, headers) {
@@ -202,5 +203,14 @@ export function advPayment(data, headers) {
     method: 'post',
     headers,
     data,
-  });
+  })
+}
+
+export function justPayAdvPayment(data, headers) {
+  return justPayRequest({
+    url: '/api/v1/payment',
+    method: 'post',
+    headers,
+    data,
+  })
 }

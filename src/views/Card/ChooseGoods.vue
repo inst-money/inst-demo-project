@@ -9,6 +9,7 @@
       @click="transcationCryptoCurrency"
     />
     <Button class="btn--next" :label="$t('choose2')" @click="buyGoods" />
+    <Button class="btn--next" label="justPay demo" @click="buyJustPayGoods" />
     <Button
       class="btn--next"
       :label="$t('choose5')"
@@ -60,8 +61,12 @@ export default {
         path: "/demo/advGoods",
       });
     },
+    buyJustPayGoods() {
+      this.$router.push({
+        path: "/demo/justPayAdvGoods",
+      });
+    },
     buyGoodsCurrency() {
-      console.log("111", window.grecaptcha);
       window.grecaptcha.enterprise.ready(async () => {
         console.log(222);
         const token = await window.grecaptcha.enterprise.execute(

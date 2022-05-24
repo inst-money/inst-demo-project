@@ -1,9 +1,5 @@
 <template>
   <div class="g-container advCash-container">
-    <div class="rows">
-      <span class="input">Goods name</span>
-      <input type="text" :value="input1" class="input" :disabled="true" />
-    </div>
     <Field
       type="select"
       v-model="from_currency"
@@ -12,7 +8,7 @@
       :options="amountOptions"
     />
     <div class="rows">
-      <span class="input">Price</span>
+      <span class="input">Amount</span>
       <input
         type="text"
         v-model.trim="ac_amount"
@@ -20,13 +16,9 @@
         oninput="value=value.toString().match(/^\d+(?:\.\d{0,2})?/)"
       />
     </div>
-    <div class="rows">
-      <span class="input">Name</span>
-      <input type="text" v-model="name" class="input" />
-    </div>
-    <div class="rows">
-      <span class="input">Email</span>
-      <input type="text" v-model="email" class="input" />
+    <div class="orderSty">
+      <span>Order Number: </span>
+      <CopyInfo :label="orderNumberUrl" />
     </div>
     <form method="post" action="https://wallet.inst.money/sci/" ref="formRef">
       <input type="hidden" name="ac_ps" value="MASTERCARD" />
@@ -70,13 +62,15 @@
 </template>
 
 <script>
+import { enc, HmacSHA256 } from "crypto-js";
 import Field from "@/components/Field.vue";
 import Button from "@/components/Button.vue";
-import { advPayment } from "@/api/data";
+import CopyInfo from "@/components/CopyInfo.vue";
+import { justPayAdvPayment } from "@/api/data";
 
 export default {
   name: "ChooseRule",
-  components: { Button, Field },
+  components: { Button, Field, CopyInfo },
   data() {
     return {
       name: "",
@@ -115,6 +109,7 @@ export default {
           label: "RP",
         },
       ],
+      orderNumberUrl: "",
     };
   },
   created() {
@@ -126,39 +121,54 @@ export default {
     this.approx = "0.00029758";
   },
   methods: {
+    getBodyString(reqBody) {
+      if (reqBody) {
+        const keys = Object.keys(reqBody).sort();
+        return keys
+          .reduce((result, cur) => `${result}&${cur}=${reqBody[cur]}`, "")
+          .substring(1);
+      }
+      return "";
+    },
+    getSignature({ method, apiKey, apiSecret, path, reqBody }, now) {
+      const bodyStr = this.getBodyString(reqBody);
+      const data = `${now}${method}${apiKey}${path}${bodyStr}`;
+      const hash = HmacSHA256(data, apiSecret);
+      return enc.Base64.stringify(hash);
+    },
+    generateAuth(railoneObj) {
+      const now = Date.now();
+      return `Inst:${railoneObj.apiKey}:${now}:${this.getSignature(
+        railoneObj,
+        now
+      )}`;
+    },
     async onsubmits(e) {
-      const auth = `Inst:b5d0b997c2444eb98e26bd93e3f5fe48:${Date.now()}:yYXX2O6Pn0PVFDpXeSYodHrlUk5URKrO2akSH4drLJ0=`;
-      // let params = {
-      //   amount: this.ac_amount,
-      //   currency: this.from_currency,
-      //   cust_order_id: Date.now(),
-      //   authorization: auth,
-      // };
-      // await advOrder(params).then((res) => {
-      //   let response = res.result;
-      //   this.ac_order_id = response.order_id;
-      //   this.ac_sign = response.data.signature;
-      // });
-      // this.$refs.formRef.submit();
-      // 获取订单url
       const params = {
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
-        customer: {
-          email: this.email,
-          name: this.name,
-        },
         return_url: window.location.href,
       };
+      var apiKey = "bd30eba11d394b36b8cdf20fb1879385";
+      var apiSecret = "684f9f41-cfab-47dd-8fc4-982625ebf851";
+      var url = "/api/v1/payment";
+      var auth = this.generateAuth({
+        method: "POST",
+        apiKey: apiKey,
+        apiSecret: apiSecret,
+        path: url,
+        reqBody: params,
+      });
+      // 获取justPay订单url
       const heareds = {
         authorization: auth,
+        "Access-Passphrase": "12345678a",
       };
-      advPayment(params, heareds).then((res) => {
+      justPayAdvPayment(params, heareds).then((res) => {
         if (res.code === 0) {
           const response = res.result;
-          const url = response.redirect_url;
-          window.location.href = url;
+          this.orderNumberUrl = response.redirect_url;
         }
       });
     },
@@ -236,6 +246,15 @@ h2 {
   }
   input {
     flex: 1;
+  }
+}
+.orderSty {
+  display: flex;
+  margin-top: 20px;
+  span {
+    height: 42px;
+    line-height: 42px;
+    margin-right: 24px;
   }
 }
 </style>
