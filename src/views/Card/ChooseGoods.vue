@@ -9,14 +9,13 @@
       @click="transcationCryptoCurrency"
     />
     <Button class="btn--next" :label="$t('choose2')" @click="buyGoods" />
-    <Button class="btn--next" label="justPay demo" @click="buyJustPayGoods" />
-    <Button
+    <Button class="btn--next" label="JustPay Demo" @click="buyJustPayGoods" />
+    <!-- <Button
       class="btn--next"
       :label="$t('choose5')"
       @click="buyGoodsCurrency"
-    />
-
-    <input type="text" v-model="iframeUrl" class="input" />
+    /> -->
+    <!-- <input type="text" v-model="iframeUrl" class="input" />
     <Button class="btn--next" label="确定" @click="openIframe" />
     <div :v-if="showIframe">
       <iframe
@@ -28,7 +27,7 @@
       >
         <p>您的浏览器暂不支持 iframe 标签。</p>
       </iframe>
-    </div>
+    </div> -->
   </div>
 </template>
 

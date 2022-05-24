@@ -56,7 +56,12 @@
         v-model="ac_status_url"
         :disabled="true"
       />
-      <Button class="btn--next" label="Confirm" @click="onsubmits" />
+      <Button
+        class="btn--next"
+        label="Confirm"
+        @click="onsubmits"
+        :loading="loading"
+      />
     </form>
   </div>
 </template>
@@ -73,6 +78,7 @@ export default {
   components: { Button, Field, CopyInfo },
   data() {
     return {
+      loading: false,
       name: "",
       email: "",
       currency: "USD",
@@ -144,6 +150,7 @@ export default {
       )}`;
     },
     async onsubmits(e) {
+      this.loading = true;
       const params = {
         amount: this.ac_amount,
         currency: this.from_currency,
@@ -165,12 +172,17 @@ export default {
         authorization: auth,
         "Access-Passphrase": "12345678a",
       };
-      justPayAdvPayment(params, heareds).then((res) => {
-        if (res.code === 0) {
-          const response = res.result;
-          this.orderNumberUrl = response.redirect_url;
-        }
-      });
+      justPayAdvPayment(params, heareds)
+        .then((res) => {
+          this.loading = false;
+          if (res.code === 0) {
+            const response = res.result;
+            this.orderNumberUrl = response.redirect_url;
+          }
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     },
     toChecked() {
       return false;
