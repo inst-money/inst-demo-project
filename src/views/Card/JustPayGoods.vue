@@ -152,6 +152,7 @@ export default {
     async onsubmits(e) {
       this.loading = true;
       const params = {
+        expire: Date.now() + 30 * 24 * 60 * 60 * 1000,
         amount: this.ac_amount,
         currency: this.from_currency,
         cust_order_id: Date.now(),
